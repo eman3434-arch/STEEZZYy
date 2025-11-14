@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>STEEZ Work Dashboard</title>
+  <style>
+    body { background: #ffeb3b; font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+    h1 { color: #333; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(150px,1fr)); gap: 10px; }
+    .card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+<h1>STEEZ Productivity Modules</h1>
+<div id="games" class="grid"></div>
+
+<script>
+fetch('games.json')
+  .then(r => r.json())
+  .then(data => {
+    const g = document.getElementById('games');
+    data.games.forEach(game => {
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerHTML = `<a href="${game.url}" target="_blank">${game.name}</a>`;
+      g.appendChild(div);
+    });
+  });
+</script>
+</body>
+</html>
